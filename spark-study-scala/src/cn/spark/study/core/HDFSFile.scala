@@ -3,9 +3,6 @@ package cn.spark.study.core
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
 
-/**
- * @author Administrator
- */
 object HDFSFile {
   
   def main(args: Array[String]) {
