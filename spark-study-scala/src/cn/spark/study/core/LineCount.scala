@@ -15,6 +15,5 @@ object LineCount {
     val linePairs = lines.map { line => (line, 1) }
     val lineCounts = linePairs.reduceByKey { _ + _ }
     lineCounts.foreach(lineCount => println(lineCount._1 + " appears " + lineCount._2 + " times."))
-    
   }
 }
