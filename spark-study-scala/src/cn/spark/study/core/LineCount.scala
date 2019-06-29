@@ -11,7 +11,7 @@ object LineCount {
         .setMaster("local")
         val sc = new SparkContext(conf)
     
-    val lines = sc.textFile("D:\\Spark\\txt\\hello.txt", 1);
+    val lines = sc.textFile("D:\\Spark\\txt\\hello.txt", 1)
     val linePairs = lines.map { line => (line, 1) }
     val lineCounts = linePairs.reduceByKey { _ + _ }
     lineCounts.foreach(lineCount => println(lineCount._1 + " appears " + lineCount._2 + " times."))
