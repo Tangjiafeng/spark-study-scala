@@ -9,7 +9,8 @@ object DataFrameCreateAndOpt {
     val conf = new SparkConf().setAppName("DataFrame").setMaster("local")
     val sc = new SparkContext(conf)    
     val sqlContext = new SQLContext(sc)
-    val df = sqlContext.read.json("F:\\temp\\students.json")
+    val df = sqlContext.read.json("E:\\spark\\json\\people.json")
+//    val df = sqlContext.read.parquet("E:\\spark\\parquet\\users.parquet")
     df.show()
     
     df.select(df.col("name")).show()

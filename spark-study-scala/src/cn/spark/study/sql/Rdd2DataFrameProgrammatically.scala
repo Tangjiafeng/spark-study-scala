@@ -9,7 +9,7 @@ import org.apache.spark.sql.types.StructField
 import org.apache.spark.sql.types.StringType
 import org.apache.spark.sql.types.IntegerType
 
-object Rdd2DataFrameProgrammatical extends App {
+object Rdd2DataFrameProgrammatically extends App {
     val conf = new SparkConf().setAppName("DataFrame").setMaster("local")
     val sc = new SparkContext(conf)
     
