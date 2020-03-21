@@ -1,0 +1,34 @@
+package cn.spark.study.sql
+
+import org.apache.spark.SparkConf
+import org.apache.spark.SparkContext
+import org.apache.spark.sql.SQLContext
+import org.apache.spark.sql.Row
+import org.apache.spark.sql.types.StructType
+import org.apache.spark.sql.types.StructField
+import org.apache.spark.sql.types.StringType
+
+object UDFunction {
+  def main(args: Array[String]): Unit = {
+    val conf = new SparkConf()
+        .setMaster("local") 
+        .setAppName("UDFunction")
+    val sc = new SparkContext(conf)
+    val sqlContext = new SQLContext(sc)
+  
+    // 构造模拟数据
+    val names = Array("Leo", "Marry", "Jack", "Tom") 
+    val namesRDD = sc.parallelize(names, 5) 
+    val namesRowRDD = namesRDD.map { name => Row(name) }
+    val structType = StructType(Array(StructField("name", StringType, true)))  
+    val namesDF = sqlContext.createDataFrame(namesRowRDD, structType) 
+    
+    // 注册一张names表
+    namesDF.registerTempTable("names")
+    
+    // 自定义函数
+    sqlContext.udf.register("strLen", (str:String) => str.length())
+    
+    sqlContext.sql("select name, strLen(name) from names").show()
+  }
+}
